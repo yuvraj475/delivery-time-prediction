@@ -20,9 +20,12 @@ with st.container(border=True):
     rating = st.number_input('⭐RATING',min_value=1,max_value=5)
     vehicle_rating = st.number_input('🛵VEHICLE RATING',min_value=0,max_value=3)
 
-df = pd.read_csv(
-    r"C:\Users\kushw\Downloads\Food delivery cleaned.csv"
-)
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
+csv_path = BASE_DIR / "Food delivery cleaned.csv"
+df = pd.read_csv(csv_path)
 
 # st.write(df.columns.tolist())
 
@@ -68,9 +71,8 @@ with st.container(border=True):
 
 })
 
-model = joblib.load(
-    r"C:\Users\kushw\Music\delivery time\delivery_time_pipeline.pkl"
-)    
+model_path = BASE_DIR / "delivery_time_pipeline_compressed.pkl"
+model = joblib.load(model_path)    
 
 st.divider()
 with st.container(border=True):
